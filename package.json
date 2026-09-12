@@ -1,0 +1,54 @@
+{
+  "name": "nvrpllst-windows",
+  "version": "1.2.1",
+  "private": true,
+  "description": "The public Windows shell and update channel for NvrPllst.",
+  "author": "n3vermin9",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "check": "node --check electron/main.cjs && node --check electron/preload.cjs",
+    "build:windows": "electron-builder --win nsis --x64 --publish never",
+    "publish:windows": "electron-builder --win nsis --x64 --publish always"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9"
+  },
+  "devDependencies": {
+    "electron": "^38.8.6",
+    "electron-builder": "^26.15.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "build": {
+    "appId": "com.nvr.nvrpllst.windows",
+    "productName": "NvrPllst",
+    "artifactName": "NvrPllst-Windows-${version}-${arch}.${ext}",
+    "directories": {
+      "output": "dist/windows"
+    },
+    "files": [
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NvrPllst",
+      "deleteAppDataOnUninstall": false
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "n3vermin9",
+      "repo": "nvrPlay-releases",
+      "releaseType": "release"
+    }
+  }
+}
