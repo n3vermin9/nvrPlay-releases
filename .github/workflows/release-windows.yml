@@ -36,7 +36,16 @@ jobs:
       - name: Validate shell
         run: npm run check
 
-      - name: Build and publish update
-        run: npm run publish:windows
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build installer and update metadata
+        run: npm run build:windows
+
+      - name: Publish completed release files
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            dist/windows/*.exe
+            dist/windows/*.yml
+            dist/windows/*.blockmap
