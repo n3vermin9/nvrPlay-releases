@@ -47,5 +47,5 @@ jobs:
           fail_on_unmatched_files: true
           files: |
             dist/windows/*.exe
-            dist/windows/*.yml
+            dist/windows/latest.yml
             dist/windows/*.blockmap
